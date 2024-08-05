@@ -1,0 +1,11 @@
+#images-container {
+  display: flex; /* Use flexbox to align items horizontally */
+  justify-content: center; /* Center the images horizontally */
+  align-items: center; /* Center the images vertically */
+}
+
+#images-container img {
+  width: 50vmin; /* Set the width of the images */
+  height: auto; /* Maintain the aspect ratio */
+  margin: 0 -80px;
+}
