@@ -1,47 +1,50 @@
-/*----- constants -----*/
+const right = [" ", "d"];
+const left = [" ", "k"];
+const double = [" ", " ", "h", "g"];
+const baseSequence = [right, left, double];
+Object.freeze(baseSequence);
 
 /*----- state variables -----*/
-let keys = {};
+let score = 0;
+let iteration = 1;
+let currentSequence = getSequence(iteration);
+
 /*----- cached elements  -----*/
-let score = document.querySelector("h1");
+let banner = document.querySelector("h1");
+let banner2 = document.querySelector("h2");
 
 /*----- event listeners -----*/
-document.addEventListener("keydown", function (event) {
-  let key = event.key.toLowerCase();
-  keys[key] = true;
-
-  checkAS();
-  checkDFHJ();
-  checkKL();
-  checkSpaceBar();
-});
-
-document.addEventListener("keyup", function (event) {
-  keys[event.key] = false;
-});
+document.addEventListener("keydown", (event) =>
+  checkKey(event, currentSequence)
+);
 
 /*----- functions -----*/
 
-function checkDFHJ() {
-  if (keys["d"] && keys["f"] && keys["h"] && keys["j"]) {
-    console.log('The "d", "f", "h", and "j" keys were pressed simultaneously');
+function checkKey(event) {
+  let key = event.key;
+  if (currentSequence.length == 0) {
+    iteration++;
+    currentSequence = getSequence(iteration);
+  }
+  if (key === currentSequence[0]) {
+    currentSequence.shift();
+    banner.innerText = "good";
+    banner2.innerText = currentSequence[0];
+    console.log(currentSequence);
+    return currentSequence;
+  } else {
+    banner.innerText = "fail";
+    return false;
   }
 }
 
-function checkAS() {
-  if (keys["a"] && keys["s"]) {
-    console.log('The "a", "s", keys were pressed simultaneously');
+function getSequence(iteration) {
+  let currentSequence = [];
+  for (let i = 0; i < baseSequence.length; i++) {
+    for (let j = 0; j < iteration; j++) {
+      currentSequence.push(...baseSequence[i]);
+    }
   }
-}
-
-function checkKL() {
-  if (keys["k"] && keys["l"]) {
-    console.log('The "s", "l", keys were pressed simultaneously');
-  }
-}
-
-function checkSpaceBar() {
-  if (keys[" "]) {
-    console.log("Spacebar");
-  }
+  console.log(currentSequence);
+  return currentSequence;
 }
