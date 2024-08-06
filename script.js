@@ -24,6 +24,7 @@ function initialize() {
 }
 
 function checkKey(event) {
+  event.preventDefault();
   let key = event.key.toLowerCase();
   changeImage(key);
   playSound();
@@ -38,7 +39,7 @@ function checkKey(event) {
     console.log(currentSequence);
     return currentSequence;
   } else {
-    banner.innerText = "fail";
+    banner.innerText = `You clicked ${key} instead of "_${currentSequence[0]}_"`;
     document.removeEventListener("keydown", checkKey);
     return false;
   }

@@ -8,4 +8,16 @@
   width: 50vmin; /* Set the width of the images */
   height: auto; /* Maintain the aspect ratio */
   margin: 0 -80px;
+  /* display: inline-flex; */
+}
+
+#spacebar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#spacebar-container img {
+  margin-top: -30vmin;
+  width: 70vmin;
 }
