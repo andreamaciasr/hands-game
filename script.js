@@ -12,6 +12,7 @@ let currentSequence = getSequence(iteration);
 /*----- cached elements  -----*/
 let banner = document.querySelector("h1");
 let scoreBoard = document.getElementById("score");
+let highestScore = document.getElementById("highest-score");
 
 /*----- event listeners -----*/
 document.addEventListener("keydown", checkKey);
