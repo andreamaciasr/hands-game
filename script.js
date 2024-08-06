@@ -11,32 +11,43 @@ let currentSequence = getSequence(iteration);
 
 /*----- cached elements  -----*/
 let banner = document.querySelector("h1");
-let banner2 = document.querySelector("h2");
+let scoreBoard = document.getElementById("score");
 
 /*----- event listeners -----*/
-document.addEventListener("keydown", (event) =>
-  checkKey(event, currentSequence)
-);
+document.addEventListener("keydown", checkKey);
 
 /*----- functions -----*/
+initialize();
+
+function initialize() {
+  scoreBoard.innerText = iteration - 1;
+}
 
 function checkKey(event) {
   let key = event.key.toLowerCase();
   changeImage(key);
+  playSound();
   if (currentSequence.length == 0) {
     iteration++;
     currentSequence = getSequence(iteration);
+    scoreBoard.innerText = iteration - 1;
   }
   if (key === currentSequence[0]) {
     currentSequence.shift();
     banner.innerText = "good";
-    banner2.innerText = currentSequence[0];
     console.log(currentSequence);
     return currentSequence;
   } else {
     banner.innerText = "fail";
+    document.removeEventListener("keydown", checkKey);
     return false;
   }
+}
+
+function playSound() {
+  let sound = document.getElementById("sound");
+  sound.currentTime = 0;
+  sound.play();
 }
 
 function changeImage(key) {
@@ -46,6 +57,7 @@ function changeImage(key) {
       document.getElementById("g").src = "./images/g1.jpg";
       document.getElementById("h").src = "./images/h1.png";
       document.getElementById("k").src = "./images/k1.png";
+      document.getElementById("spacebar").src = "./images/spacebar1.png";
       break;
     case "g":
       document.getElementById("d").src = "./images/d1.png";
