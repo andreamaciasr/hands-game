@@ -35,6 +35,11 @@ initialize();
 function initialize() {
   scoreBoard.innerText = iteration - 1;
 }
+initialize();
+
+function initialize() {
+  scoreBoard.innerText = iteration - 1;
+}
 
 function checkKey(event) {
   let key = event.key.toLowerCase();
@@ -43,6 +48,7 @@ function checkKey(event) {
   if (currentSequence.length == 0) {
     iteration++;
     currentSequence = getSequence(iteration);
+    scoreBoard.innerText = iteration - 1;
     scoreBoard.innerText = iteration - 1;
   }
   if (key === currentSequence[0]) {
