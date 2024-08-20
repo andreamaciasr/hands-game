@@ -12,9 +12,21 @@ let currentSequence = getSequence(iteration);
 /*----- cached elements  -----*/
 let banner = document.querySelector("h1");
 let scoreBoard = document.getElementById("score");
-let highestScore = document.getElementById("highest-score");
+const d = document.getElementById("d");
+const g = document.getElementById("g");
+const h = document.getElementById("h");
+const k = document.getElementById("k");
+const spacebar = document.getElementById("spacebar");
 
-/*----- event listeners -----*/
+const elements = {
+  d: d,
+  g: g,
+  h: h,
+  k: k,
+  spacebar: spacebar,
+};
+
+/*----- event liste   ners -----*/
 document.addEventListener("keydown", checkKey);
 
 /*----- functions -----*/
@@ -25,10 +37,9 @@ function initialize() {
 }
 
 function checkKey(event) {
-  event.preventDefault();
   let key = event.key.toLowerCase();
-  changeImage(key);
-  playSound();
+  if (key === " ") key = "spacebar";
+  jump(key);
   if (currentSequence.length == 0) {
     iteration++;
     currentSequence = getSequence(iteration);
@@ -40,8 +51,8 @@ function checkKey(event) {
     console.log(currentSequence);
     return currentSequence;
   } else {
-    banner.innerText = `You clicked ${key} instead of "_${currentSequence[0]}_"`;
-    document.removeEventListener("keydown", checkKey);
+    banner.innerText = "fail";
+    // document.removeEventListener("keydown", checkKey);
     return false;
   }
 }
@@ -52,43 +63,17 @@ function playSound() {
   sound.play();
 }
 
-function changeImage(key) {
-  switch (key) {
-    case "d":
-      document.getElementById("d").src = "./images/d2.png";
-      document.getElementById("g").src = "./images/g1.jpg";
-      document.getElementById("h").src = "./images/h1.png";
-      document.getElementById("k").src = "./images/k1.png";
-      document.getElementById("spacebar").src = "./images/spacebar1.png";
-      break;
-    case "g":
-      document.getElementById("d").src = "./images/d1.png";
-      document.getElementById("g").src = "./images/g2.jpg";
-      document.getElementById("h").src = "./images/h1.png";
-      document.getElementById("k").src = "./images/k1.png";
-      document.getElementById("spacebar").src = "./images/spacebar1.png";
-      break;
-    case "h":
-      document.getElementById("d").src = "./images/d1.png";
-      document.getElementById("g").src = "./images/g1.jpg";
-      document.getElementById("h").src = "./images/h2.png";
-      document.getElementById("k").src = "./images/k1.png";
-      document.getElementById("spacebar").src = "./images/spacebar1.png";
-      break;
-    case "k":
-      document.getElementById("d").src = "./images/d1.png";
-      document.getElementById("g").src = "./images/g1.jpg";
-      document.getElementById("h").src = "./images/h1.png";
-      document.getElementById("k").src = "./images/k2.png";
-      document.getElementById("spacebar").src = "./images/spacebar1.png";
-      break;
-    case " ":
-      document.getElementById("d").src = "./images/d1.png";
-      document.getElementById("g").src = "./images/g1.jpg";
-      document.getElementById("h").src = "./images/h1.png";
-      document.getElementById("k").src = "./images/k1.png";
-      document.getElementById("spacebar").src = "./images/spacebar2.png";
-      break;
+function jump(key) {
+  let elem = elements[key];
+
+  if (elem) {
+    elem.src = `./images/${key}2.png`;
+    elem.classList.add("jump");
+
+    setTimeout(() => {
+      elem.classList.remove("jump");
+      elem.src = `./images/${key}1.png`;
+    }, 500);
   }
 }
 
