@@ -2,21 +2,26 @@ const right = [" ", "d"];
 const left = [" ", "k"];
 const double = [" ", " ", "h", "g"];
 const baseSequence = [right, left, double];
-Object.freeze(baseSequence);
+if (localStorage.getItem("highestScore") === null) {
+  localStorage.setItem("highestScore", 0);
+}
 
 /*----- state variables -----*/
-let score = 0;
-let iteration = 1;
-let currentSequence = getSequence(iteration);
+let iteration;
+let score;
+let currentSequence;
 
 /*----- cached elements  -----*/
-let banner = document.querySelector("h1");
-let scoreBoard = document.getElementById("score");
+const banner = document.getElementById("banner");
+const scoreBoard = document.getElementById("score");
+const highestBoard = document.getElementById("highest");
 const d = document.getElementById("d");
 const g = document.getElementById("g");
 const h = document.getElementById("h");
 const k = document.getElementById("k");
 const spacebar = document.getElementById("spacebar");
+const highestScore = localStorage.getItem("highestScore");
+const restartButton = document.querySelector("button");
 
 const elements = {
   d: d,
@@ -26,50 +31,66 @@ const elements = {
   spacebar: spacebar,
 };
 
-/*----- event liste   ners -----*/
-document.addEventListener("keydown", checkKey);
+/*----- event listeners -----*/
 
 /*----- functions -----*/
 initialize();
 
 function initialize() {
-  scoreBoard.innerText = iteration - 1;
+  document.addEventListener("keydown", checkKey);
+  restartButton.addEventListener("click", restart);
+  iteration = 1;
+  score = iteration - 1;
+  currentSequence = getSequence(iteration);
+  scoreBoard.innerText = `score: ${score}`;
+  highestBoard.innerText = `highest: ${highestScore}`;
+  banner.innerText = "start";
 }
-initialize();
 
-function initialize() {
-  scoreBoard.innerText = iteration - 1;
+function restart() {
+  initialize();
+}
+
+function setHighest() {
+  if (parseInt(highestScore) < score) {
+    localStorage.setItem("highestScore", score);
+    highestBoard.innerText = `highest: ${highestScore}`;
+  }
 }
 
 function checkKey(event) {
+  event.preventDefault();
   let key = event.key.toLowerCase();
-  if (key === " ") key = "spacebar";
   jump(key);
   if (currentSequence.length == 0) {
     iteration++;
     currentSequence = getSequence(iteration);
-    scoreBoard.innerText = iteration - 1;
-    scoreBoard.innerText = iteration - 1;
+    score++;
+    scoreBoard.innerText = score;
   }
   if (key === currentSequence[0]) {
     currentSequence.shift();
+    playSound(1);
     banner.innerText = "good";
-    console.log(currentSequence);
     return currentSequence;
   } else {
-    banner.innerText = "fail";
-    // document.removeEventListener("keydown", checkKey);
+    banner.innerText = `You clicked ${key} instead of "${currentSequence[0]}"`;
+    playSound(0);
+    setHighest();
+    document.removeEventListener("keydown", checkKey);
     return false;
   }
 }
 
-function playSound() {
-  let sound = document.getElementById("sound");
+function playSound(move) {
+  let sound = move ? "good" : "fail";
+  sound = document.getElementById(sound);
   sound.currentTime = 0;
   sound.play();
 }
 
 function jump(key) {
+  if (key === " ") key = "spacebar";
   let elem = elements[key];
 
   if (elem) {
@@ -90,6 +111,5 @@ function getSequence(iteration) {
       currentSequence.push(...baseSequence[i]);
     }
   }
-  console.log(currentSequence);
   return currentSequence;
 }
