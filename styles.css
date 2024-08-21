@@ -1,14 +1,33 @@
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 #images-container {
-  display: flex; /* Use flexbox to align items horizontally */
+  display: flex;
   justify-content: center; /* Center the images horizontally */
   align-items: center; /* Center the images vertically */
+  margin-top: 11vmin;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: row; /* Aligns items in a row */
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-around; /* Distributes space between items */
+  margin-top: -10vmin;
 }
 
 #images-container img {
-  width: 50vmin; /* Set the width of the images */
-  height: auto; /* Maintain the aspect ratio */
+  width: 50vmin;
   margin: 0 -80px;
-  /* display: inline-flex; */
 }
 
 #spacebar-container {

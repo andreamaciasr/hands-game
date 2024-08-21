@@ -31,8 +31,6 @@ const elements = {
   spacebar: spacebar,
 };
 
-/*----- event listeners -----*/
-
 /*----- functions -----*/
 initialize();
 
@@ -74,9 +72,11 @@ function checkKey(event) {
     banner.innerText = "good";
     return currentSequence;
   } else {
-    banner.innerText = `You clicked ${key} instead of "${currentSequence[0]}"`;
+    let word = key === " " ? "spacebar" : key;
+    banner.innerHTML = `You clicked <span style="color: orange;">${word}</span> instead of <span style="color: #FF1493;">"${currentSequence[0]}"</span>`;
     playSound(0);
     setHighest();
+    x;
     document.removeEventListener("keydown", checkKey);
     return false;
   }
