@@ -21,7 +21,7 @@ const h = document.getElementById("h");
 const k = document.getElementById("k");
 const spacebar = document.getElementById("spacebar");
 const highestScore = localStorage.getItem("highestScore");
-const restartButton = document.querySelector("button");
+const restartButton = document.getElementById("play-again");
 
 const elements = {
   d: d,
@@ -37,12 +37,13 @@ initialize();
 function initialize() {
   document.addEventListener("keydown", checkKey);
   restartButton.addEventListener("click", restart);
+  restartButton.style.display = "none";
   iteration = 1;
   score = iteration - 1;
   currentSequence = getSequence(iteration);
   scoreBoard.innerText = `score: ${score}`;
   highestBoard.innerText = `highest: ${highestScore}`;
-  banner.innerText = "start";
+  banner.innerText = "";
 }
 
 function restart() {
@@ -72,14 +73,18 @@ function checkKey(event) {
     banner.innerText = "good";
     return currentSequence;
   } else {
-    let word = key === " " ? "spacebar" : key;
-    banner.innerHTML = `You clicked <span style="color: orange;">${word}</span> instead of <span style="color: #FF1493;">"${currentSequence[0]}"</span>`;
-    playSound(0);
-    setHighest();
-    x;
-    document.removeEventListener("keydown", checkKey);
+    gameOver(key);
     return false;
   }
+}
+
+function gameOver(key) {
+  let word = key === " " ? "spacebar" : key;
+  banner.innerHTML = `You clicked <span style="color: orange;">${word}</span> instead of <span style="color: #FF1493;">"${currentSequence[0]}"</span>`;
+  playSound(0);
+  setHighest();
+  document.removeEventListener("keydown", checkKey);
+  restartButton.style.display = "block";
 }
 
 function playSound(move) {

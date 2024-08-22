@@ -8,6 +8,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-style: normal;
+  font-size: 2.5vmin;
 }
 
 #images-container {
@@ -55,4 +56,22 @@ body {
 
 .jump {
   animation: jump 0.5s ease;
+}
+
+#play-again {
+  display: none;
+  background-color: #fee509;
+  color: #161616;
+  border: 5px solid #91b596;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 20px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#play-again:hover {
+  background-color: #fe8a8a;
+  color: #f2ebe3;
 }
