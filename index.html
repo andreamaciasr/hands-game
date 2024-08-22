@@ -23,17 +23,23 @@
     <div id="spacebar-container">
       <img id="spacebar" alt="spacebar" src="./images/spacebar1.png" />
     </div>
+    <div id="instruc-container">
+      <p id="instructions">
+        <span style="color: purple">purple ---></span> d &nbsp;
+        <span style="color: orangered">yellow ---></span> g &nbsp;
+        <span style="color: green">green ---> </span> h &nbsp;
+        <span style="color: blue">blue ---></span> k &nbsp;
+        <span style="color: rgb(255, 0, 208)">fish ---></span> spacebar &nbsp;
+        sequence: [sb / d / sb / k / sb / sb / h / g] -> ...
+        [(sb/d)*n(sp/k)*n(sb/sb/h/g)*n]
+      </p>
+    </div>
 
     <div id="main-container">
       <h2 id="score"></h2>
       <p id="highest"></p>
-      <p id="instructions">
-        purple ---> d &nbsp; yellow ---> g &nbsp; green ---> h &nbsp; blue --->
-        k &nbsp; fish ---> spacebar &nbsp; [sb / d / sb / k / sb / sb / h / g]
-        -> [sb /
-        d/spacebar/d/spacebar/k/spacebar/k/spacebar/spacebar/hg/spacebar/spacebar/h/g]
-        -> ... [(_d)*n(_k)*n(__hg)*n]
-      </p>
+      <button id="instructionsButton">instructions</button>
+
       <p id="banner"></p>
       <div>
         <button id="play-again">play again</button>

@@ -22,6 +22,8 @@ const k = document.getElementById("k");
 const spacebar = document.getElementById("spacebar");
 const highestScore = localStorage.getItem("highestScore");
 const restartButton = document.getElementById("play-again");
+const instructionsButton = document.getElementById("instructionsButton");
+const instructions = document.getElementById("instructions");
 
 const elements = {
   d: d,
@@ -31,12 +33,14 @@ const elements = {
   spacebar: spacebar,
 };
 
+instructionsButton.addEventListener("click", displayInstructions);
+
 /*----- functions -----*/
 initialize();
 
 function initialize() {
   document.addEventListener("keydown", checkKey);
-  restartButton.addEventListener("click", restart);
+  restartButton.addEventListener("click", initialize);
   restartButton.style.display = "none";
   iteration = 1;
   score = iteration - 1;
@@ -46,8 +50,8 @@ function initialize() {
   banner.innerText = "";
 }
 
-function restart() {
-  initialize();
+function displayInstructions() {
+  instructions.classList.toggle("show");
 }
 
 function setHighest() {

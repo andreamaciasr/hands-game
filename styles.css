@@ -18,14 +18,6 @@ body {
   margin-top: 11vmin;
 }
 
-#main-container {
-  display: flex;
-  flex-direction: row; /* Aligns items in a row */
-  align-items: center; /* Aligns items vertically in the center */
-  justify-content: space-around; /* Distributes space between items */
-  margin-top: -10vmin;
-}
-
 #images-container img {
   width: 50vmin;
   margin: 0 -80px;
@@ -74,4 +66,47 @@ body {
 #play-again:hover {
   background-color: #fe8a8a;
   color: #f2ebe3;
+}
+
+#instructionsButton {
+  color: rgb(236, 43, 200);
+  border-color: rgb(236, 43, 200);
+  border-style: ridge;
+  font-family: "Roboto", sans-serif;
+  font-size: medium;
+  background-color: #f6f8d4;
+}
+
+#instructions {
+  opacity: 0;
+  visibility: hidden; /* Prevents interaction when hidden */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Smooth transition */
+  max-width: 150vmin;
+  padding: 1vmin;
+  background-color: #fbfbbf;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#instructions.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: row; /* Aligns items in a row */
+  align-items: center; /* Aligns items vertically in the center */
+  justify-content: space-around; /* Distributes space between items */
+  margin-top: 0.5vmin; /*------www*/
+}
+
+#instruc-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1vmin;
+  overflow: visible;
+  margin-top: -12vmin;
+  margin-bottom: 1vmin;
 }
